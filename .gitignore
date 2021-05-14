@@ -1,0 +1,6 @@
+node_modules
+.sess
+.log
+dist/**/*.d.ts
+dist/**/*.map
+*.log

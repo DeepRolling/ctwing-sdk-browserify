@@ -1,0 +1,34 @@
+{
+  "name": "@ctsy/ctwing-sdk",
+  "version": "2.0.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "ctwing",
+    "aep",
+    "中国电信",
+    "天翼",
+    "AEP平台",
+    "物联网"
+  ],
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "README.md",
+    "yarn.lock"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "*",
+    "moment": "*"
+  },
+  "scripts": {
+    "prepublishOnly": "tsc"
+  },
+  "devDependencies": {
+    "@types/axios": "*",
+    "@types/node": "*"
+  },
+  "repository": "https://git.tansuyun.cn/TanSuYun/ctwing-sdk",
+  "author": "castleiMac <castle@tansuyun.cn>"
+}
