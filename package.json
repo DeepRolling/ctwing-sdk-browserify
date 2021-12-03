@@ -34,7 +34,7 @@
     "typescript": "^4.2.2",
     "crypto-es": "1.2.7"
   },
-  "repository": "https://github.com/c-tsy/ctwing",
+  "repository": "https://github.com:DeepRolling/ctwing-sdk-browserify",
   "author": "deepcode <deepcode1024@163.com>",
   "contributors": [{
     "name": "castleiMac",
