@@ -1,78 +1,38 @@
-# 中国电信 物联网平台 AEP 平台 www.ctwing.cn NodejsApi
+# Purpose
+Offer ctwing sdk for browser or react-native enviorment
 
-```typescript
-import { ctwing } from "./index";
-(async () => {
-  let ProductID = 10022900;
-  let appKey = "";
-  let appSecret = "";
-  let MasterKey = "";
-  let DeviceID = "";
-  let device = new ctwing.Device(ProductID);
-  device.appKey = appKey;
-  device.MasterKey = MasterKey;
-  device.appSecret = appSecret;
-  let sub = new ctwing.Subscriptions(ProductID);
-  sub.appKey = appKey;
-  sub.MasterKey = MasterKey;
-  sub.appSecret = appSecret;
-  let data = new ctwing.Data(ProductID);
-  data.appKey = appKey;
-  data.MasterKey = MasterKey;
-  data.appSecret = appSecret;
-  let com = new ctwing.Command(DeviceID);
-  com.appKey = appKey;
-  com.MasterKey = MasterKey;
-  com.appSecret = appSecret;
-  try {
-    let rs = await device.Create(
-      "we7658e729c74c01a79fa46a6",
-      "test1001test",
-      "YYY",
-      {}
-    );
-    rs = await device.Delete("we7658e729c74c01a79fa46a694eaff1");
-    rs = await device.Update(
-      "67fde26edb074611aabdb870872b3b22",
-      "test1001test11",
-      "YYY",
-      {}
-    );
-    rs = await device.Query("be7658e729c74c01a79fa46a694eaff1");
-    rs = await device.Query("67fde26edb074611aabdb870872b3b22");
-    rs = await device.QueryList("");
-    // --------- 设备订阅操作---------------------
-    rs = await sub.Create(
-      "67fde26edb074611aabdb870872b3b22",
-      2,
-      "YYY",
-      "www.baidu.com",
-      [1]
-    );
-    rs = await sub.Delete("be7658e729c74c01a79fa46a694eaff1", 1, 1);
-    rs = await sub.Query(10022900);
-    rs = await sub.QueryList(1, 10, 1);
-    // --------- 数据状态查询---------------------
-    rs = await data.QueryPage(
-      "2d5750603d28403d85b784a852ed24c6",
-      5,
-      "1571456132140",
-      JSON.stringify(Date.now())
-    );
-    rs = await data.QueryTotal(
-      "2d5750603d28403d85b784a852ed24c6",
-      "1571456132140",
-      JSON.stringify(Date.now())
-    );
-    rs = await data.Query("2d5750603d28403d85b784a852ed24c6", "temperature");
-    rs = await data.QueryList("2d5750603d28403d85b784a852ed24c6");
-    // ----------设备指令操作---------
-    rs = await com.send(Buffer.from("0102", "hex"));
-    rs = await com.Cancel("2");
-    rs = await com.query("2");
-    rs = await com.queryList();
-  } catch (error) {
-    console.log(error.message);
-  }
-})();
+inspired by [ctwing-sdk](https://github.com/c-tsy/ctwing) but change the crypto library and query-params
+libarary implementation . 
+
+# Installation
+```bash
+yarn add ctwing-sdk-browserify
 ```
+
+# Usage
+```typescript
+import {CommandOperate, injectCTWingConfiguration} from '@deepcode/ctwing-sdk-browserify';
+//you need inject your appKey and appSecret first ( create an application in ctwing platform and you will find them)
+injectCTWingConfiguration(appKey, appSecret);
+let commandOperate = new CommandOperate(productId, masterKey, deviceId);
+//you always need to send json data , and different protocol(mqtt or t-link) have different message format
+//following is mqtt message format
+const mqttMessage = {
+    payload: {
+        status: 1,
+        temperature: 26,
+    },
+}
+//dispatch message to device
+await commandOperate.sendJSON(mqttMessage);
+```
+
+# Limitation
+
+For these sdk implementation , I only use dispatch device command functionality , 
+so that I can't ensure other functionality of this library work correctly . 
+
+But you also can modify it by your self , I already split the code to multiple file
+so that the code should be read easily . 
+
+In the end , **Welcome PR to perfect this library** .

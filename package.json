@@ -1,6 +1,6 @@
 {
-  "name": "@ctsy/ctwing-sdk",
-  "version": "2.0.3",
+  "name": "ctwing-sdk-browserify",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "keywords": [
@@ -9,26 +9,35 @@
     "中国电信",
     "天翼",
     "AEP平台",
-    "物联网"
+    "物联网",
+    "browserify",
+    "react-native"
   ],
   "files": [
-    "dist/index.js",
-    "dist/index.d.ts",
+    "dist/*",
     "README.md",
     "yarn.lock"
   ],
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "axios": "*",
-    "moment": "*"
+    "moment": "*",
+    "crypto-es": "1.2.7"
   },
   "scripts": {
     "prepublishOnly": "tsc"
   },
   "devDependencies": {
     "@types/axios": "*",
-    "@types/node": "*"
+    "@types/node": "*",
+    "moment": "*",
+    "typescript": "^4.2.2",
+    "crypto-es": "1.2.7"
   },
   "repository": "https://github.com/c-tsy/ctwing",
-  "author": "castleiMac <castle@tansuyun.cn>"
+  "author": "deepcode <deepcode1024@163.com>",
+  "contributors": [{
+    "name": "castleiMac",
+    "email": "castle@tansuyun.cn"
+  }]
 }
