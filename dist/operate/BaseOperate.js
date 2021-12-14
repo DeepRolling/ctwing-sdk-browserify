@@ -31,8 +31,17 @@ class BaseOperate {
             return conf;
         });
         axios_1.default.interceptors.response.use((data) => {
-            // console.log('response : '+JSON.stringify(data))
-            //response : {"commandId":"11","command":"{\"status\":1,\"temperature\":26}","commandStatus":"指令已保存","productId":15107165,"deviceId":"15107165123","imei":null,"createBy":"ctsy","createTime":1638502139622,"ttl":0}
+            if (data.data === undefined) {
+                // notice : some times , the callback data is parsed data , I don't know why , but this if is an workaround
+                // console.log('response : '+JSON.stringify(data))
+                //response : {"commandId":"11","command":"{\"status\":1,\"temperature\":26}","commandStatus":"指令已保存","productId":15107165,"deviceId":"15107165123","imei":null,"createBy":"ctsy","createTime":1638502139622,"ttl":0}
+                return data;
+            }
+            // console.log('debug ctwing , data type is :' + typeof data);
+            // console.log('debug ctwing , data value is :' + JSON.stringify(data));
+            // console.log('debug ctwing , data.data type is :' + typeof data.data);
+            // console.log('debug ctwing , data.data value is :' + JSON.stringify(data.data));
+            // console.log('debug ctwing , code type is :' + typeof data.data.code);
             if (data.data.code != 0) {
                 throw new Error(data.data.msg || data.data.desc);
             }
